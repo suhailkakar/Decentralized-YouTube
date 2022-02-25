@@ -17,7 +17,9 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3modal": "^1.9.5",
+    "web3uikit": "^0.1.48"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,8 +46,11 @@
     ]
   },
   "devDependencies": {
+    "add": "^2.0.6",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.6",
-    "tailwindcss": "^3.0.23"
+    "stream-http": "^3.2.0",
+    "tailwindcss": "^3.0.23",
+    "yarn": "^1.22.17"
   }
 }
