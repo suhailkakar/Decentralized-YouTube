@@ -1,28 +1,39 @@
-import React from "react";
-import { Header } from "./components/Header";
-import Sidebar from "./components/Sidebar";
-import Video from "./components/Video";
+import React, { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import Main from "./pages/main";
+import Upload from "./pages/Upload";
 
 export default function App() {
+  const [UserWallet, setUserWallet] = useState(null);
+
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (!ethereum) {
+        alert("Get MetaMask!");
+        return;
+      }
+
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log("Connected", accounts[0]);
+      setUserWallet(accounts[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    connectWallet();
+  }, []);
+
   return (
-    <div className="w-full h-screen flex flex-row">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
-        <Header />
-        <div className="flex-1 flex flex-row flex-wrap">
-          <Video />
-          <Video />
-          <Video />
-          <Video />
-          <Video />
-          <Video />
-          <Video />
-          <Video />
-          <Video />
-          <Video />
-          <Video />
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" exact element={<Main userWallet={UserWallet} />} />
+      <Route path="*" element={<div>404</div>} />
+      <Route path="/upload" element={<Upload />} />
+    </Routes>
   );
 }

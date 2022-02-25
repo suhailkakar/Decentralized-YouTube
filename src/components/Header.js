@@ -1,6 +1,7 @@
 import React from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Toggle from "../utils/ThemeToggle";
 
 export const Header = () => {
@@ -21,10 +22,12 @@ export const Header = () => {
       </div>
 
       <div className=" w-1/3 flex justify-end">
-        <AiOutlinePlusCircle
-          size="30px"
-          className="mr-8 fill-whiteIcons dark:fill-white"
-        />
+        <Link to="/upload">
+          <AiOutlinePlusCircle
+            size="30px"
+            className="mr-8 fill-whiteIcons dark:fill-white cursor-pointer"
+          />
+        </Link>
         <Toggle />
 
         <img

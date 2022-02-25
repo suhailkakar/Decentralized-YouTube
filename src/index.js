@@ -4,14 +4,16 @@ import "./index.css";
 import App from "./App";
 import { ThemeProvider } from "./utils/ThemeContext";
 import Background from "./components/Background";
-
+import { BrowserRouter } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <Background>
-        <App />
-      </Background>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <Background>
+          <App />
+        </Background>
+      </ThemeProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
