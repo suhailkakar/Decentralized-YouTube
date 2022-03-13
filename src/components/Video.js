@@ -13,8 +13,8 @@ export default function Video({ horizontal, video }) {
       <img
         className={
           horizontal
-            ? "object-cover rounded-lg w-60 "
-            : "object-cover rounded-lg"
+            ? "object-cover rounded-lg w-60  "
+            : "object-cover rounded-lg w-full h-40"
         }
         src={`https://ipfs.infura.io/ipfs/${video.thumbnailHash}`}
         alt=""

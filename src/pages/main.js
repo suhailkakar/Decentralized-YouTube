@@ -11,8 +11,11 @@ import getContract from "../utils/getContract";
 export default function Main() {
   const [videos, setVideos] = useState([]);
   const [AllVideos, setAllVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingArray, setLoadingArray] = useState(10);
 
   const getBlockChainData = async () => {
+    setLoading(true);
     let contract = await getContract();
     let videosCount = await contract.videoCount();
     console.log(String(videosCount));
@@ -23,6 +26,7 @@ export default function Main() {
     }
     setAllVideos(videos);
     setVideos(videos);
+    setLoading(false);
   };
 
   const filterData = (e) => {
@@ -49,8 +53,29 @@ export default function Main() {
               </div>
             </Link>
           ))}
+          {loading && (
+            <div className="flex-1 flex flex-row flex-wrap">
+              {Array(loadingArray)
+                .fill(0)
+                .map((_, index) => (
+                  <div className="w-80">
+                    <Loader />
+                  </div>
+                ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
+
+const Loader = () => {
+  return (
+    <div class="flex flex-col m-5 animate-pulse">
+      <div class="w-full bg-gray-300 dark:bg-borderGray h-40 rounded-lg "></div>
+      <div class="w-50 mt-3 bg-gray-300 dark:bg-borderGray h-6 rounded-md "></div>
+      <div class="w-24 bg-gray-300 h-3 dark:bg-borderGray mt-3 rounded-md "></div>
+    </div>
+  );
+};
