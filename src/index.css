@@ -3,3 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.audio-toggle.react-toggle--checked .react-toggle-track {
+  background-color: #3b84f5 !important;
+}

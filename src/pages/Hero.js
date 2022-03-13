@@ -1,7 +1,28 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function HeroHome() {
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  let navigate = useNavigate();
+
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (!ethereum) {
+        alert("Get MetaMask!");
+        return;
+      }
+
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log("Connected", accounts[0]);
+      localStorage.setItem("walletAddress", accounts[0]);
+      navigate("/app");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>

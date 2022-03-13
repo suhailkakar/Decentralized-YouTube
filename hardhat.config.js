@@ -4,7 +4,7 @@ require("@nomiclabs/hardhat-waffle");
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
-
+  // 0x3d1A3169200354605d22C838C01a09B7D3F25581
   for (const account of accounts) {
     console.log(account.address);
   }
@@ -22,6 +22,7 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
+    mumbai: {},
   },
   paths: {
     artifacts: "./src/artifacts",
