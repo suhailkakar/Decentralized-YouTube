@@ -5,7 +5,7 @@ import "hardhat/console.sol";
 
 contract OurTube {
     uint256 public videoCount = 0;
-    string public name = "OurTube";
+    string public name = "OurTube Contract";
     mapping(uint256 => Video) public videos;
 
     struct Video {

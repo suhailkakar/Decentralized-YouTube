@@ -25,10 +25,10 @@ export default function App() {
         method: "eth_requestAccounts",
       });
 
-      // await ethereum.request({
-      //   method: "wallet_switchEthereumChain",
-      //   params: [{ chainId: "0x80001" }],
-      // });
+      await ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: `0x${Number(80001).toString(16)}` }],
+      });
       console.log("Connected", accounts[0]);
       localStorage.setItem("walletAddress", accounts[0]);
 
@@ -40,6 +40,14 @@ export default function App() {
 
   useEffect(() => {
     checkedWallet();
+    if (window.ethereum) {
+      window.ethereum.on("chainChanged", () => {
+        window.location.reload();
+      });
+      window.ethereum.on("accountsChanged", () => {
+        checkedWallet();
+      });
+    }
   }, []);
 
   return (

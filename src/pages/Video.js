@@ -3,7 +3,6 @@ import { Header } from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import VideoComponent from "../components/VideoComponent";
 import Video from "../components/Video";
-import demoDate from "../demo.json";
 import getContract from "../utils/getContract";
 import { Link } from "react-router-dom";
 export default function VideoPage() {

@@ -22,7 +22,10 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-    mumbai: {},
+    mumbai: {
+      url: "YOUR_NODE_URL_HERE",
+      accounts: ["YOUR_PRIVATE_KEY_HERE"],
+    },
   },
   paths: {
     artifacts: "./src/artifacts",

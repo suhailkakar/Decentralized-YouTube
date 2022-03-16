@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Header } from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Video from "../components/Video";
-import demoData from "../demo.json";
 import ContractAbi from "../artifacts/contracts/OurTube.sol/OurTube.json";
 import { ethers } from "ethers";
 import getContract from "../utils/getContract";
@@ -37,12 +36,24 @@ export default function Main() {
     setVideos(filteredVideos);
   };
 
+  const filterBasedOnCategory = (category) => {
+    console.log(category);
+    if (category === "All") {
+      setVideos(AllVideos);
+    } else {
+      let filteredVideos = AllVideos.filter((video) => {
+        return video.category.toLowerCase().includes(category.toLowerCase());
+      });
+      setVideos(filteredVideos);
+    }
+  };
+
   useEffect(() => {
     getBlockChainData();
   }, []);
   return (
     <div className="w-full  flex flex-row">
-      <Sidebar />
+      <Sidebar updateCategory={(category) => filterBasedOnCategory(category)} />
       <div className="flex-1 flex flex-col">
         <Header search={(text) => filterData(text)} />
         <div className="flex-1 flex flex-row flex-wrap">

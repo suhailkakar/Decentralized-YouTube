@@ -109,8 +109,13 @@ export default function Upload() {
     };
     console.log("Saving video", data);
     let contract = await getContract();
-    let UploadedDate = new Date();
-    contract.uploadVideo(
+    let UploadedDate = String(new Date());
+
+    console.log("UploadedDate", UploadedDate);
+
+    // Show successfully alert
+
+    await contract.uploadVideo(
       video,
       title,
       description,
@@ -120,7 +125,6 @@ export default function Upload() {
       isAudio,
       UploadedDate
     );
-    console.log("Video saved");
   };
 
   const goBack = () => {
@@ -133,20 +137,7 @@ export default function Upload() {
       <div className="flex-1 flex flex-col">
         <Header />
 
-        <div className="mt-5 mr-10 flex  justify-between">
-          <label className="flex flex-row items-center">
-            <Toggle
-              defaultChecked={isAudio}
-              onChange={(e) => {
-                console.log(e.target.checked);
-                setIsAudio(e.target.checked);
-                setVideo("");
-              }}
-              icons={false}
-              className="audio-toggle ml-10"
-            />
-            <span className="dark:text-white ml-3 ">Audio Only</span>
-          </label>
+        <div className="mt-5 mr-10 flex  justify-end">
           <div className="flex items-center">
             <button
               className="bg-transparent  dark:text-[#9CA3AF] py-2 px-6 border rounded-lg  border-gray-600  mr-6"
@@ -176,7 +167,7 @@ export default function Upload() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Rick Astley - Never Gonna Give You Up (Official Music Video)"
-              className="w-[90%]  dark:placeholder:text-gray-600  rounded-md mt-2 h-12 p-2 border border-borderWhiteGray bg-white dark:bg-backgroundBlack dark:border-[#444752] focus:outline-none"
+              className="w-[90%] dark:text-white  dark:placeholder:text-gray-600  rounded-md mt-2 h-12 p-2 border border-borderWhiteGray bg-white dark:bg-backgroundBlack dark:border-[#444752] focus:outline-none"
             />
             <label className="text-gray-600 dark:text-[#9CA3AF] mt-10 text-sm">
               Description
@@ -185,7 +176,7 @@ export default function Upload() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Never Gonna Give You Up was a global smash on its release in July 1987, topping the charts in 25 countries including Rick’s native UK and the US Billboard Hot 100.  It also won the Brit Award for Best single in 1988. Stock Aitken and Waterman wrote and produced the track which was the lead-off single and lead track from Rick’s debut LP “Whenever You Need Somebody."
-              className="w-[90%] dark:placeholder:text-gray-600 rounded-md mt-2  h-32 p-2 border border-borderWhiteGray bg-white dark:bg-backgroundBlack dark:border-[#444752] focus:outline-none"
+              className="w-[90%] dark:text-white  dark:placeholder:text-gray-600 rounded-md mt-2  h-32 p-2 border border-borderWhiteGray bg-white dark:bg-backgroundBlack dark:border-[#444752] focus:outline-none"
             />
 
             <div className="flex flex-row mt-10 w-[90%]  justify-between">
@@ -198,7 +189,7 @@ export default function Upload() {
                   onChange={(e) => setLocation(e.target.value)}
                   type="text"
                   placeholder="Bali - Indonesia"
-                  className="rounded-md mt-2 dark:placeholder:text-gray-600  h-12 p-2 border border-borderWhiteGray bg-white dark:bg-backgroundBlack dark:border-[#444752] focus:outline-none"
+                  className="rounded-md dark:text-white mt-2 dark:placeholder:text-gray-600  h-12 p-2 border border-borderWhiteGray bg-white dark:bg-backgroundBlack dark:border-[#444752] focus:outline-none"
                 />
               </div>
               <div className="flex flex-col w-2/5	">
@@ -208,7 +199,7 @@ export default function Upload() {
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className=" rounded-md mt-2  h-12 p-2 dark:border-gray-600 border border-borderWhiteGray bg-white dark:bg-backgroundBlack dark:text-[#9CA3AF] focus:outline-none"
+                  className=" rounded-md dark:text-white mt-2  h-12 p-2 dark:border-gray-600 border border-borderWhiteGray bg-white dark:bg-backgroundBlack dark:text-[#9CA3AF] focus:outline-none"
                 >
                   <option>Music</option>
                   <option>Sports</option>
