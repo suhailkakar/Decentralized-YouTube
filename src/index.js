@@ -5,16 +5,18 @@ import App from "./App";
 import { ThemeProvider } from "./utils/ThemeContext";
 import Background from "./components/Background";
 import { BrowserRouter } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        <Background>
+  <Background>
+    <React.StrictMode>
+      <BrowserRouter>
+        <ThemeProvider>
+          <Toaster />
           <App />
-        </Background>
-      </ThemeProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+        </ThemeProvider>
+      </BrowserRouter>
+    </React.StrictMode>
+  </Background>,
   document.getElementById("root")
 );
 
