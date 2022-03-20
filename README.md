@@ -5,7 +5,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/suhailkakar/Decentralized-YouTube">
     <img src="logo.png" alt="Logo" width="110" height="80">
   </a>
 
