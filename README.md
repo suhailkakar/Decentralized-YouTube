@@ -64,6 +64,9 @@ You need to have Node.js, NPM and hardhat installed on your computer, before run
    npx hardhat compile
    ```
 3. Deploy the smart contract 
+    ```sh 
+    npx hardhat run --network mumbai scripts/deploy.js
+    ```
 4. Get your contract address and paste in on `getContract.js`
 3. Run the app
 	  ```sh
