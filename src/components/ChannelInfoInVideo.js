@@ -17,7 +17,7 @@ export default function ChannelInfoInVIdeo({ video }) {
             <BiCheck size="20px" className="ml-1 fill-gray" />
           </p>
           <p className="text-sm flex items-center text-textSubTitle ">
-            12,988 ETH
+            Video by {video.author}
           </p>
         </div>
       </div>

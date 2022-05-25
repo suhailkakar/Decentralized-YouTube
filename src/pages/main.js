@@ -52,11 +52,11 @@ export default function Main() {
     getBlockChainData();
   }, []);
   return (
-    <div className="w-full  flex flex-row">
+    <div className="w-full   flex flex-row">
       <Sidebar updateCategory={(category) => filterBasedOnCategory(category)} />
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 h-screen flex flex-col">
         <Header search={(text) => filterData(text)} />
-        <div className="flex-1 flex flex-row flex-wrap">
+        <div className="flex flex-row flex-wrap">
           {videos.map((video) => (
             <Link to={`/video?id=${video.id}`}>
               <div className="w-80">
@@ -64,6 +64,7 @@ export default function Main() {
               </div>
             </Link>
           ))}
+
           {loading && (
             <div className="flex-1 flex flex-row flex-wrap">
               {Array(loadingArray)

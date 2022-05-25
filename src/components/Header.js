@@ -15,12 +15,14 @@ export const Header = ({ search }) => {
         </Link>
       </div>
       <div className=" w-1/3 flex justify-center items-center">
-        <input
-          type="text"
-          onChange={(e) => search(e.target.value)}
-          placeholder="Type to search"
-          className=" border-0  dark:bg-backgroundBlack  text-gray-600 focus:outline-none"
-        />
+        {search ? (
+          <input
+            type="text"
+            onChange={(e) => search(e.target.value)}
+            placeholder="Type to search"
+            className=" border-0  dark:bg-backgroundBlack  text-gray-600 focus:outline-none"
+          />
+        ) : null}
       </div>
 
       <div className=" w-1/3 flex justify-end">

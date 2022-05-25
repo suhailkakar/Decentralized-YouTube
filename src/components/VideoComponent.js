@@ -14,7 +14,6 @@ export default function VIdeoComponent({ video }) {
             {video.category} • {video.date}
           </p>
         </div>
-        <button> Tip to author</button>
       </div>
       <ChannelInfoInVideo video={video} />
     </div>

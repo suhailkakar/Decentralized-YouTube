@@ -19,7 +19,7 @@ export default function Sidebar({ updateCategory }) {
 
   let mode = localStorage.getItem("color-theme");
   console.log("mode", mode);
-  let color = mode === "dark" ? "#1a1c1f" : "#000";
+  let color = mode === "dark" ? "#4B5563" : "#000";
 
   let categories = [
     {
