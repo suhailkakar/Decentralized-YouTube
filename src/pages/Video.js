@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useApolloClient, gql } from "@apollo/client";
 import { Header } from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import VideoComponent from "../components/VideoComponent";
@@ -8,6 +9,8 @@ import { Link } from "react-router-dom";
 export default function VideoPage() {
   const [video, setVideo] = useState(null);
   const [relatedVideos, setRelatedVideos] = useState([]);
+
+  const client = useApolloClient();
   const getUrlVars = () => {
     var vars = {};
     var parts = window.location.href.replace(
@@ -19,26 +22,62 @@ export default function VideoPage() {
     return vars;
   };
 
-  const getBlockChainData = async () => {
-    let contract = await getContract();
-    let videoId = getUrlVars()["id"];
-    console.log(String(videoId));
-    let video = await contract.videos(videoId);
-    console.log(video);
-    let videosCount = await contract.videoCount();
-    console.log(String(videosCount));
-    let videos = [];
-    for (var i = videosCount; i >= 1; i--) {
-      let video = await contract.videos(i);
-      videos.push(video);
+  const GET_VIDEOS = gql`
+    query videos(
+      $first: Int
+      $skip: Int
+      $orderBy: Video_orderBy
+      $orderDirection: OrderDirection
+      $where: Video_filter
+    ) {
+      videos(
+        first: $first
+        skip: $skip
+        orderBy: $orderBy
+        orderDirection: $orderDirection
+        where: $where
+      ) {
+        id
+        hash
+        title
+        description
+        location
+        category
+        thumbnailHash
+        isAudio
+        date
+        author
+        createdAt
+      }
     }
+  `;
 
-    setRelatedVideos(videos);
-    setVideo(video);
+  const getRelatedVideos = () => {
+    client
+      .query({
+        query: GET_VIDEOS,
+        variables: {
+          first: 20,
+          skip: 0,
+          orderBy: "createdAt",
+          orderDirection: "desc",
+          where: {}
+        },
+        fetchPolicy: "network-only"
+      })
+      .then(({ data }) => {
+        console.log("videos", data.videos);
+        setRelatedVideos(data.videos);
+        const video = data?.videos?.find((video) => video.id === getUrlVars().id);
+        setVideo(video);
+      })
+      .catch((err) => {
+        alert("Something went wrong. please try again.!", err.message);
+      });
   };
 
   useEffect(() => {
-    getBlockChainData();
+    getRelatedVideos();
   }, []);
 
   return (
@@ -61,6 +100,7 @@ export default function VideoPage() {
                     setVideo(video);
                   }}
                   to={`/video?id=${video.id}`}
+                  key={video.id}
                 >
                   <Video video={video} horizontal={true} />
                 </Link>
