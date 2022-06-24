@@ -10,7 +10,8 @@
 6. Generate types
 7. Build subgraph
 8. Authorize graph cli for deployment using token
-9. Deploy subgraph
+9. update deploy script in `package.json` with your subgraph slug
+10. Deploy subgraph
 
 ```
 yarn install
