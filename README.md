@@ -1,5 +1,3 @@
-
-
 <div id="top"></div>
 
 <br />
@@ -12,35 +10,30 @@
 
 </div>
 
-
-
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://twitter.com/suhailkakar)
 
 OurTube is a YouTube Clone built on top of Polygon network, that allows users to create, share and watch videos, without worrying about their privacy.
 
-
-
 ### Built With
 
-* [React.js](https://reactjs.org/)
-* [Tailwind CSS](https://tailwindcss.com/)
-* [Solidity](https://soliditylang.org/)
-* [Ethers.js](https://docs.ethers.io/v5/)
-* [Infura IPFS](https://infura.io/product/ipfs)
-* [Alchemy Node](https://www.alchemy.com/)
-
-
+- [React.js](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Solidity](https://soliditylang.org/)
+- [Ethers.js](https://docs.ethers.io/v5/)
+- [Infura IPFS](https://infura.io/product/ipfs)
+- [Alchemy Node](https://www.alchemy.com/)
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 To get this application up and and running on your local machine follow these simple steps.
 
 ### Prerequisites
 
-You need to have Node.js, NPM and hardhat installed on your computer, before running this project. 
+You need to have Node.js, NPM and hardhat installed on your computer, before running this project.
 
 ### Installation
 
@@ -49,32 +42,48 @@ You need to have Node.js, NPM and hardhat installed on your computer, before run
    git clone https://github.com/suhailkakar/Decentralized-YouTube
    ```
 2. Install NPM packages
+
    ```sh
    npm install
    ```
-   or 
-   
-     ```sh
+
+   or
+
+   ```sh
    yarn install
    ```
-3. Compile the smart contract 
-	  ```sh
+
+3. Compile the smart contract
+   ```sh
    npx hardhat compile
    ```
-3. Deploy the smart contract 
-4. Get your contract address and paste in on `getContract.js`
-3. Run the app
-	  ```sh
+4. Deploy the smart contract
+
+5. Deploy subgraph in `indexer` directory by following steps in `indexer/README.md` (optional, since it is already deployed in hosted service)
+
+6. Get subgraph query endpoint after deployment and update it in `src/index.js`
+
+```js
+const client = new ApolloClient({
+  uri: "YOUR_SUBGRAPH_LINK_HERE", // <-- Update this
+  cache: new InMemoryCache(),
+});
+```
+
+7. Get your contract address and paste in on `getContract.js`
+8. Run the app
+
+   ```sh
    npm start
    ```
-  
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue. 
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue.
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
@@ -83,14 +92,8 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
 ### License
 
 This project is an open source software licensed under the MIT License
-
-### Contributor
-
-* [Suhail Kakar](https://twitter.com/suhailkakar)
-
 
 [product-screenshot]: screenshot.png

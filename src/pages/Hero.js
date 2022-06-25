@@ -24,6 +24,14 @@ function HeroHome() {
     }
   };
 
+  const continueAsGuest = () => {
+    localStorage.setItem(
+      "walletAddress",
+      "0x0000000000000000000000000000000000000000"
+    );
+    navigate("/app");
+  };
+
   return (
     <>
       <section className="relative bg-black flex flex-col h-screen justify-center items-center">
@@ -83,13 +91,16 @@ function HeroHome() {
                   their privacy.
                 </p>
                 <button
-                  className="   items-center  bg-white rounded-full font-medium  p-4 shadow-lg"
+                  className="items-center  bg-white rounded-full font-medium  p-4 shadow-lg"
                   onClick={() => {
                     connectWallet();
                   }}
                 >
-                  <span className="">Connect your wallet to continue</span>
+                  <span>Connect your wallet to continue</span>
                 </button>
+                <p onClick={continueAsGuest} className="text-gray-400 mt-5">
+                  Continue as a guest
+                </p>
               </div>
             </div>
           </div>

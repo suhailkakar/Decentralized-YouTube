@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import ContractAbi from "../artifacts/contracts/OurTube.sol/OurTube.json";
@@ -22,6 +23,16 @@ export default function Upload() {
   const client = create("https://ipfs.infura.io:5001/api/v0");
   const thumbnailRef = useRef();
   const videoRef = useRef();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const address = localStorage.getItem("walletAddress");
+    if (address && address.startsWith("0x000000000000")) {
+      console.log('connect your wallet to continue');
+      navigate("/");
+    }
+  }, []);
 
   const handleSubmit = async () => {
     if (
@@ -85,7 +96,7 @@ export default function Upload() {
         uploadVIdeo: added.path,
         thumbnail: thumbnail,
       });
-      saveVideo(added.path, thumbnail);
+      await saveVideo(added.path, thumbnail);
       toast.success("Video uploaded successfully", {
         style: {
           borderRadius: "10px",
@@ -93,6 +104,7 @@ export default function Upload() {
           color: "#fff",
         },
       });
+      goBack();
     } catch (error) {
       console.log("Error uploading file: ", error);
     }

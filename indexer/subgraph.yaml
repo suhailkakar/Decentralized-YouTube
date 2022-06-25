@@ -1,0 +1,27 @@
+specVersion: 0.0.4
+description: OurTube Subgraph by Salman
+features:
+  - nonFatalErrors
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: OurTube
+    network: mumbai
+    source:
+      address: "0xf6F03b0837569eec33e0Af7f3F43B362916e5de1"
+      startBlock: 25496648
+      abi: OurTube
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Video
+      abis:
+        - name: OurTube
+          file: ./abis/OurTube.json
+      eventHandlers:
+        - event: VideoUploaded(uint256,string,string,string,string,string,string,bool,string,address)
+          handler: handleVideoUploaded
+      file: ./src/mapping.ts

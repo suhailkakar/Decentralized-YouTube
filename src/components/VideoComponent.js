@@ -11,7 +11,7 @@ export default function VIdeoComponent({ video }) {
         <div>
           <h3 className="text-2xl dark:text-white">{video.title}</h3>
           <p className="text-gray-500 mt-1">
-            {video.category} • {video.date}
+            {video.category} • {new Date(video.createdAt * 1000).toLocaleString("en-IN")}
           </p>
         </div>
       </div>

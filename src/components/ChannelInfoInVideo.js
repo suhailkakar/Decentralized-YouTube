@@ -21,7 +21,7 @@ export default function ChannelInfoInVIdeo({ video }) {
           </p>
         </div>
       </div>
-      <p className="text-sm text-black mt-4 ml-16">{video.description}</p>
+      <p className="text-sm text-black text-textSubTitle mt-4 ml-16">{video.description}</p>
     </div>
   );
 }

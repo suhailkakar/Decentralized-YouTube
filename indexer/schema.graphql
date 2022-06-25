@@ -1,0 +1,13 @@
+type Video @entity {
+  id: ID!
+  hash: String! # string
+  title: String! # string
+  description: String # string
+  location: String # string
+  category: String # string
+  thumbnailHash: String! # string
+  isAudio: Boolean # bool
+  date: String # string
+  author: Bytes! # address
+  createdAt: BigInt! # timestamp
+}
