@@ -96,7 +96,7 @@ export default function Upload() {
         uploadVIdeo: added.path,
         thumbnail: thumbnail,
       });
-      saveVideo(added.path, thumbnail);
+      await saveVideo(added.path, thumbnail);
       toast.success("Video uploaded successfully", {
         style: {
           borderRadius: "10px",
@@ -104,6 +104,7 @@ export default function Upload() {
           color: "#fff",
         },
       });
+      goBack();
     } catch (error) {
       console.log("Error uploading file: ", error);
     }
