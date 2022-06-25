@@ -1,6 +1,7 @@
 import React from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { VscDebugDisconnect } from 'react-icons/vsc';
 import { Link } from "react-router-dom";
 import Toggle from "../utils/ThemeToggle";
 import Logo from "../assets/logo.svg";
@@ -33,10 +34,18 @@ export const Header = ({ search }) => {
           />
         </Link>
         <Toggle />
-
-        <div className=" w-[30px] h-[30px] ml-8">
-          <Jazzicon address={address} />
-        </div>
+        {address && address.startsWith("0x000000000000") ? (
+          <Link to="/">
+            <VscDebugDisconnect
+              size="30px"
+              className="ml-8 mr-8 fill-whiteIcons dark:fill-white cursor-pointer w-[30px] h-[30px]"
+            />
+          </Link>
+        ) : (
+          <div className=" w-[30px] h-[30px] ml-8">
+            <Jazzicon address={address} />
+          </div>
+        )}
       </div>
     </header>
   );

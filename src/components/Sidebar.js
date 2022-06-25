@@ -32,7 +32,7 @@ export default function Sidebar({ updateCategory }) {
       ),
       onClick: () => {
         setActive("All");
-        updateCategory("All");
+        updateCategory("");
       },
     },
     {
