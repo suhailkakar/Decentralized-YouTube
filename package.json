@@ -19,6 +19,7 @@
     "graphql": "^16.5.0",
     "hardhat": "^2.8.4",
     "ipfs-http-client": "^56.0.1",
+    "moment": "^2.29.3",
     "plyr-react": "^3.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
