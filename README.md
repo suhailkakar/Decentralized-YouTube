@@ -14,16 +14,16 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://twitter.com/suhailkakar)
 
-OurTube is a YouTube Clone built on top of Polygon network, that allows users to create, share and watch videos, without worrying about their privacy.
+OurTube is a YouTube Clone built on top of Polygon network and The Graph, that allows users to create, share and watch videos, without worrying about their privacy.
 
 ### Built With
 
 - [React.js](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Solidity](https://soliditylang.org/)
-- [Ethers.js](https://docs.ethers.io/v5/)
-- [Infura IPFS](https://infura.io/product/ipfs)
-- [Alchemy Node](https://www.alchemy.com/)
+- [Polygon](https://polygon.technology/)
+- [The Graph](https://thegraph.com/en/)
+
 
 <!-- GETTING STARTED -->
 
@@ -77,7 +77,15 @@ You need to have Node.js, NPM and hardhat installed on your computer, before run
    npm start
    ```
 
-<!-- CONTRIBUTING -->
+### Roadmap 
+- [X] Login with Wallet
+- [X] Upload functionality 
+- [X] Search and filter functionality
+- [ ] Channel page 
+- [ ] Subscribing to channel
+- [ ] Commenting on videos
+- [ ] Support for Audio files
+
 
 ## Contributing
 
