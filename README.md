@@ -65,8 +65,8 @@ You need to have Node.js, NPM and hardhat installed on your computer, before run
 
 ```js
 const client = new ApolloClient({
-  uri: "https://api.thegraph.com/subgraphs/name/salmandabbakuti/ourtube", // <-- Update this
-  cache: new InMemoryCache()
+  uri: "YOUR_SUBGRAPH_LINK_HERE", // <-- Update this
+  cache: new InMemoryCache(),
 });
 ```
 
@@ -95,9 +95,5 @@ Don't forget to give the project a star! Thanks again!
 ### License
 
 This project is an open source software licensed under the MIT License
-
-### Contributor
-
-- [Suhail Kakar](https://twitter.com/suhailkakar)
 
 [product-screenshot]: screenshot.png

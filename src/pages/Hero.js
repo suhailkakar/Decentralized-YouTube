@@ -24,8 +24,11 @@ function HeroHome() {
     }
   };
 
-  const continueWithoutSigningIn = () => {
-    localStorage.setItem("walletAddress", "0x0000000000000000000000000000000000000000");
+  const continueAsGuest = () => {
+    localStorage.setItem(
+      "walletAddress",
+      "0x0000000000000000000000000000000000000000"
+    );
     navigate("/app");
   };
 
@@ -93,14 +96,11 @@ function HeroHome() {
                     connectWallet();
                   }}
                 >
-                  <span className="">Connect your wallet to continue</span>
+                  <span>Connect your wallet to continue</span>
                 </button>
-                <button
-                  className="items-center  bg-white rounded-full font-medium  p-4 shadow-lg"
-                  onClick={continueWithoutSigningIn}
-                >
-                  <span className="">Guest Mode</span>
-                </button>
+                <p onClick={continueAsGuest} className="text-gray-400 mt-5">
+                  Continue as a guest
+                </p>
               </div>
             </div>
           </div>

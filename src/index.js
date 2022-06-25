@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 const client = new ApolloClient({
-  uri: "https://api.thegraph.com/subgraphs/name/salmandabbakuti/ourtube",
+  uri: "https://api.thegraph.com/subgraphs/name/suhailkakar/ourtube",
   cache: new InMemoryCache(),
 });
 

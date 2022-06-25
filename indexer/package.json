@@ -4,10 +4,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ salmandabbakuti/ourtube",
-    "create-local": "graph create --node http://localhost:8020/ salmandabbakuti/ourtube",
-    "remove-local": "graph remove --node http://localhost:8020/ salmandabbakuti/ourtube",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 salmandabbakuti/ourtube"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ suhailkakar/ourtube",
+    "create-local": "graph create --node http://localhost:8020/ suhailkakar/ourtube",
+    "remove-local": "graph remove --node http://localhost:8020/ suhailkakar/ourtube",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 suhailkakar/ourtube"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.29.0",

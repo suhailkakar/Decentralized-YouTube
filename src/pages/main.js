@@ -4,9 +4,6 @@ import { useApolloClient, gql } from "@apollo/client";
 import { Header } from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Video from "../components/Video";
-import ContractAbi from "../artifacts/contracts/OurTube.sol/OurTube.json";
-import { ethers } from "ethers";
-import getContract from "../utils/getContract";
 
 export default function Main() {
   const [videos, setVideos] = useState([]);
@@ -59,11 +56,15 @@ export default function Main() {
           orderBy: "createdAt",
           orderDirection: "desc",
           where: {
-            ...titleSearchInput && { title_contains_nocase: titleSearchInput },
-            ...categorySearchInput && { category_contains_nocase: categorySearchInput },
-          }
+            ...(titleSearchInput && {
+              title_contains_nocase: titleSearchInput,
+            }),
+            ...(categorySearchInput && {
+              category_contains_nocase: categorySearchInput,
+            }),
+          },
         },
-        fetchPolicy: "network-only"
+        fetchPolicy: "network-only",
       })
       .then(({ data }) => {
         setLoading(false);
@@ -81,8 +82,10 @@ export default function Main() {
     getVideos();
   }, [titleSearchInput, categorySearchInput]);
   return (
-    <div className="w-full   flex flex-row">
-      <Sidebar updateCategory={(category) => setCategorySearchInput(category)} />
+    <div className="w-full flex flex-row">
+      <Sidebar
+        updateCategory={(category) => setCategorySearchInput(category)}
+      />
       <div className="flex-1 h-screen flex flex-col">
         <Header search={(text) => setTitleSearchInput(text)} />
         <div className="flex flex-row flex-wrap">
