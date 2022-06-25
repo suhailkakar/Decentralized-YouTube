@@ -58,19 +58,19 @@ You need to have Node.js, NPM and hardhat installed on your computer, before run
    npx hardhat compile
    ```
 4. Deploy the smart contract
+5. Get your contract address and paste in on `getContract.js`
 
-5. Deploy subgraph in `indexer` directory by following steps in `indexer/README.md` (optional, since it is already deployed in hosted service)
+6. Deploy subgraph in `indexer` directory by following steps in `indexer/README.md` (optional, since it is already deployed in hosted service)
 
-6. Get subgraph query endpoint after deployment and update it in `src/index.js`
+7. Get subgraph query endpoint after deployment and update it in `src/index.js`
 
-```js
-const client = new ApolloClient({
-  uri: "YOUR_SUBGRAPH_LINK_HERE", // <-- Update this
-  cache: new InMemoryCache(),
-});
-```
+    ```js
+    const client = new ApolloClient({
+      uri: "YOUR_SUBGRAPH_LINK_HERE", // <-- Update this
+      cache: new InMemoryCache(),
+    });
+    ```
 
-7. Get your contract address and paste in on `getContract.js`
 8. Run the app
 
    ```sh
