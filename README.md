@@ -104,4 +104,4 @@ Don't forget to give the project a star! Thanks again!
 
 This project is an open source software licensed under the MIT License
 
-[product-screenshot]: screenshot.png
+[product-screenshot]: https://radicle.community/uploads/default/original/2X/1/1275b4e842a315e9211c8905c16a34116493c301.jpeg
