@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import UploadInput from "../components/UploadInput";
 import ContractAbi from "../artifacts/contracts/OurTube.sol/OurTube.json";
 import { ethers } from "ethers";
 import { create } from "ipfs-http-client";
@@ -22,7 +23,6 @@ export default function Upload() {
 
   const client = create("https://ipfs.infura.io:5001/api/v0");
   const thumbnailRef = useRef();
-  const videoRef = useRef();
 
   const navigate = useNavigate();
 
@@ -258,50 +258,11 @@ export default function Upload() {
               }}
             />
           </div>
-
-          <div
-            onClick={() => {
-              videoRef.current.click();
-            }}
-            className={
-              video
-                ? " w-96   rounded-md  h-64 items-center justify-center flex"
-                : "border-2 dark:border-gray-600  w-96 border-dashed border-borderWhiteGray rounded-md mt-8   h-64 items-center justify-center flex"
-            }
-          >
-            {video ? (
-              <>
-                {isAudio ? (
-                  <audio
-                    src={URL.createObjectURL(video)}
-                    controls
-                    className="w-full h-full"
-                  />
-                ) : (
-                  <video
-                    controls
-                    src={URL.createObjectURL(video)}
-                    className="h-full rounded-md"
-                  />
-                )}
-              </>
-            ) : (
-              <p className="dark:text-[#9CA3AF]">
-                Upload {isAudio ? "Audio" : "Video"}
-              </p>
-            )}
-          </div>
+          <UploadInput 
+            isAudio={isAudio}
+            setVideo={setVideo} 
+          />
         </div>
-        <input
-          type="file"
-          className="hidden"
-          ref={videoRef}
-          accept={isAudio ? "audio/*" : "video/*"}
-          onChange={(e) => {
-            setVideo(e.target.files[0]);
-            console.log(e.target.files[0]);
-          }}
-        />
       </div>
     </div>
   );
