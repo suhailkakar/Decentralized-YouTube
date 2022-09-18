@@ -15,10 +15,10 @@ export default function Header({ search }: IHeader) {
       <div className=" w-1/3	">
         <Link href={"/home"}>
           <Image
-            src="https://raw.githubusercontent.com/suhailkakar/Decentralized-YouTube/main/src/assets/logo.svg"
+            src="https://raw.githubusercontent.com/suhailkakar/Decentralized-YouTube/version-1/logo.png"
             alt="Decentralized YouTube"
-            width={100}
-            height={50}
+            width={55}
+            height={40}
           />
         </Link>
       </div>

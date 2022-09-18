@@ -10,7 +10,7 @@ const saveToIPFS = async (file) => {
 
   var config = {
     method: "post",
-    url: `${WEB3_STORAGE_URL}`,
+    url: `https://api.web3.storage/upload`,
     headers: {
       Authorization: `Bearer ${WEB3_STORAGE_KEY}`,
       "Content-Type": "text/plain",
