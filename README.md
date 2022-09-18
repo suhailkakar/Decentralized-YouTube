@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/suhailkakar/Decentralized-YouTube">
-    <img src="logo.png" alt="Logo" width="110" height="80">
+    <img src="https://raw.githubusercontent.com/suhailkakar/Decentralized-YouTube/version-1/logo.png" alt="Logo" width="110" height="80">
   </a>
 
 <h3 align="center">OurTube — It is YouTube but decentralized</h3>
@@ -16,13 +16,19 @@
 
 OurTube is a YouTube Clone built on top of Polygon network and The Graph, that allows users to create, share and watch videos, without worrying about their privacy.
 
+> This is the version 2.0 of this applications, you can find the first verion [here](https://github.com/suhailkakar/Decentralized-YouTube/tree/version-1)
+
 ### Built With
 
-- [React.js](https://reactjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Solidity](https://soliditylang.org/)
-- [Polygon](https://polygon.technology/)
-- [The Graph](https://thegraph.com/en/)
+- Frontend framework: Next.js
+- Smart contracts: Solidity
+- Ethereum web client library: Ethers.js
+- File storage: IPFS
+- Querying data: The Graph
+- CSS Framework: TailwindCSS
+- Ethereum development environment: Hardhat
+- Layer 2 blockchain: Polygon
+- Video Infrastructure: Livepeer
 
 
 <!-- GETTING STARTED -->
@@ -52,39 +58,29 @@ You need to have Node.js, NPM and hardhat installed on your computer, before run
    ```sh
    yarn install
    ```
-
-3. Compile the smart contract
+3. Create an `.env` file and get an API key from Livepeer studio, Web3 Storage and Imagekit. 
+   ```sh
+   PRIVATE_KEY="156a3ffca59392a7c7139d2a4576eb8b736b60a8a986a776b5f9f0970285a4f7"
+   NEXT_PUBLIC_LIVEPEER_KEY="f953aa45-5454-4d14-9104-b5a9f96d8189"
+   NEXT_PUBLIC_WEB3_STORAGE_KEY=
+   NEXT_PUBLIC_IMAGEKIT_ID="onboard"
+   ```
+4. Compile the smart contract
    ```sh
    npx hardhat compile
    ```
-4. Deploy the smart contract
-5. Get your contract address and paste in on `getContract.js`
+5. Deploy the smart contract
+6. Get your contract address and paste in on `constants/index.ts`
 
-6. Deploy subgraph in `indexer` directory by following steps in `indexer/README.md` (optional, since it is already deployed in hosted service)
+7. Deploy subgraph in `indexer` directory by following steps in `indexer/README.md` (optional, since it is already deployed in hosted service)
 
-7. Get subgraph query endpoint after deployment and update it in `src/index.js`
+8. Get subgraph query endpoint after deployment and update it in `constants/index.t`
 
-    ```js
-    const client = new ApolloClient({
-      uri: "YOUR_SUBGRAPH_LINK_HERE", // <-- Update this
-      cache: new InMemoryCache(),
-    });
-    ```
-
-8. Run the app
+9. Run the app
 
    ```sh
    npm start
    ```
-
-### Roadmap 
-- [X] Login with Wallet
-- [X] Upload functionality 
-- [X] Search and filter functionality
-- [ ] Channel page 
-- [ ] Subscribing to channel
-- [ ] Commenting on videos
-- [ ] Support for Audio files
 
 
 ## Contributing
