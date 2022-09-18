@@ -14,12 +14,12 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const OurTube = await hre.ethers.getContractFactory("OurTube");
-  const ourtube = await OurTube.deploy("Hello, OurTube!");
+  const Ourtube = await hre.ethers.getContractFactory("Ourtube");
+  const ourtube = await Ourtube.deploy();
 
   await ourtube.deployed();
 
-  console.log("OurTube deployed to:", ourtube.address);
+  console.log("Ourtube deployed to:", ourtube.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -64,7 +64,7 @@ export class VideoUploaded__Params {
   }
 }
 
-export class OurTube__videosResult {
+export class Ourtube__videosResult {
   value0: BigInt;
   value1: string;
   value2: string;
@@ -114,11 +114,51 @@ export class OurTube__videosResult {
     map.set("value9", ethereum.Value.fromAddress(this.value9));
     return map;
   }
+
+  getId(): BigInt {
+    return this.value0;
+  }
+
+  getHash(): string {
+    return this.value1;
+  }
+
+  getTitle(): string {
+    return this.value2;
+  }
+
+  getDescription(): string {
+    return this.value3;
+  }
+
+  getLocation(): string {
+    return this.value4;
+  }
+
+  getCategory(): string {
+    return this.value5;
+  }
+
+  getThumbnailHash(): string {
+    return this.value6;
+  }
+
+  getIsAudio(): boolean {
+    return this.value7;
+  }
+
+  getDate(): string {
+    return this.value8;
+  }
+
+  getAuthor(): Address {
+    return this.value9;
+  }
 }
 
-export class OurTube extends ethereum.SmartContract {
-  static bind(address: Address): OurTube {
-    return new OurTube("OurTube", address);
+export class Ourtube extends ethereum.SmartContract {
+  static bind(address: Address): Ourtube {
+    return new Ourtube("Ourtube", address);
   }
 
   name(): string {
@@ -151,14 +191,14 @@ export class OurTube extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  videos(param0: BigInt): OurTube__videosResult {
+  videos(param0: BigInt): Ourtube__videosResult {
     let result = super.call(
       "videos",
       "videos(uint256):(uint256,string,string,string,string,string,string,bool,string,address)",
       [ethereum.Value.fromUnsignedBigInt(param0)]
     );
 
-    return new OurTube__videosResult(
+    return new Ourtube__videosResult(
       result[0].toBigInt(),
       result[1].toString(),
       result[2].toString(),
@@ -172,7 +212,7 @@ export class OurTube extends ethereum.SmartContract {
     );
   }
 
-  try_videos(param0: BigInt): ethereum.CallResult<OurTube__videosResult> {
+  try_videos(param0: BigInt): ethereum.CallResult<Ourtube__videosResult> {
     let result = super.tryCall(
       "videos",
       "videos(uint256):(uint256,string,string,string,string,string,string,bool,string,address)",
@@ -183,7 +223,7 @@ export class OurTube extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new OurTube__videosResult(
+      new Ourtube__videosResult(
         value[0].toBigInt(),
         value[1].toString(),
         value[2].toString(),
@@ -214,10 +254,6 @@ export class ConstructorCall__Inputs {
 
   constructor(call: ConstructorCall) {
     this._call = call;
-  }
-
-  get _greeting(): string {
-    return this._call.inputValues[0].value.toString();
   }
 }
 

@@ -1,11 +1,5 @@
 [
-  {
-    "inputs": [
-      { "internalType": "string", "name": "_greeting", "type": "string" }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
+  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
   {
     "anonymous": false,
     "inputs": [

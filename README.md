@@ -12,7 +12,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://twitter.com/suhailkakar)
+[![Ourtube][product-screenshot]](https://twitter.com/suhailkakar)
 
 OurTube is a YouTube Clone built on top of Polygon network and The Graph, that allows users to create, share and watch videos, without worrying about their privacy.
 

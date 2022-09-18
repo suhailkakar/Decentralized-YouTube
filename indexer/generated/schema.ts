@@ -15,12 +15,6 @@ export class Video extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("hash", Value.fromString(""));
-    this.set("title", Value.fromString(""));
-    this.set("thumbnailHash", Value.fromString(""));
-    this.set("author", Value.fromBytes(Bytes.empty()));
-    this.set("createdAt", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {

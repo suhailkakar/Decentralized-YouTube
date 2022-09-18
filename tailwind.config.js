@@ -1,17 +1,36 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  darkMode: "class", // or 'class'
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./layout/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        borderGray: "#202229",
-        white: "#fff",
         primary: "#3B84F5",
-        backgroundBlack: "#1a1c1f",
-        whiteIcons: "#1a1c1f",
-        borderWhiteGray: "#dfdfdf",
-        textSubTitle: "#878787",
-        textTitle: "#fff",
+        white: "#fff",
+        background: {
+          dark: "#1a1c1f",
+          light: "#fff",
+        },
+        border: {
+          dark: "#202229",
+          light: "#dfdfdf",
+        },
+        text: {
+          dark: "#fff",
+          light: "#1a1c1f",
+        },
+        subtitle: {
+          dark: "#878787",
+          light: "#878787",
+        },
+        icons: {
+          dark: "#ffffff",
+          light: "#1a1c1f",
+        },
       },
       boxShadow: {
         xs: "0 0 0 1px rgba(0, 0, 0, 0.16)",
@@ -50,61 +69,8 @@ module.exports = {
         "1/2": "50%",
         full: "100%",
       },
-      letterSpacing: {
-        tighter: "-0.02em",
-        tight: "-0.01em",
-        normal: "0",
-        wide: "0.01em",
-        wider: "0.02em",
-        widest: "0.4em",
-      },
-      lineHeight: {
-        none: "1",
-        tighter: "1.125",
-        tight: "1.25",
-        snug: "1.375",
-        normal: "1.5",
-        relaxed: "1.625",
-        loose: "2",
-        3: ".75rem",
-        4: "1rem",
-        5: "1.2rem",
-        6: "1.5rem",
-        7: "1.75rem",
-        8: "2rem",
-        9: "2.25rem",
-        10: "2.5rem",
-      },
-      minWidth: {
-        10: "2.5rem",
-        48: "12rem",
-      },
-      opacity: {
-        90: "0.9",
-      },
-      scale: {
-        98: ".98",
-      },
-      animation: {
-        float: "float 3s ease-in-out infinite",
-      },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-5%)" },
-        },
-      },
-      zIndex: {
-        "-1": "-1",
-      },
     },
   },
-  variants: {
-    backgroundColor: ["responsive", "hover", "focus", "group-hover"],
-    textColor: ["responsive", "hover", "focus", "group-hover"],
-    translate: ["responsive", "hover", "focus", "group-hover"],
-    boxShadow: ["responsive", "hover", "focus", "focus-within"],
-    opacity: ["responsive", "hover", "focus", "group-hover"],
-  },
+
   plugins: [],
 };

@@ -1,11 +1,14 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
+// Importing Console.sol from the hardhat console library
 import "hardhat/console.sol";
 
-contract OurTube {
+contract Ourtube {
+    // State variable
     uint256 public videoCount = 0;
-    string public name = "OurTube Contract";
+    // Contract owner
+    string public name = "Ourtube Contract";
     mapping(uint256 => Video) public videos;
 
     struct Video {
@@ -34,8 +37,8 @@ contract OurTube {
         address author
     );
 
-    constructor(string memory _greeting) {
-        console.log("Deploying OutTube:", _greeting);
+    constructor() {
+        console.log("Deploying OutTube");
     }
 
     function uploadVideo(

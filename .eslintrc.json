@@ -1,0 +1,11 @@
+{
+  "extends": "next/core-web-vitals",
+  "settings" : {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"], 
+        "path" : ["components", "pages", "styles", "utils", "public", "assets", "types", "clients", "constants", "layouts", "queries"]
+      }
+    }
+  },
+}
