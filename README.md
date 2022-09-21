@@ -16,6 +16,8 @@
 
 OurTube is a YouTube Clone built on top of Polygon network and The Graph, that allows users to create, share and watch videos, without worrying about their privacy.
 
+Here is a complete tutorial on how to build a similar project: https://blog.suhailkakar.com/building-a-full-stack-web3-youtube-clone-with-next-ipfs-the-graph-solidity-and-livepeer
+
 > This is the version 2.0 of this applications, you can find the first verion [here](https://github.com/suhailkakar/Decentralized-YouTube/tree/version-1)
 
 ### Built With
