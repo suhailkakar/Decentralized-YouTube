@@ -62,10 +62,10 @@ You need to have Node.js, NPM and hardhat installed on your computer, before run
    ```
 3. Create an `.env` file and get an API key from Livepeer studio, Web3 Storage and Imagekit. 
    ```sh
-   PRIVATE_KEY="156a3ffca59392a7c7139d2a4576eb8b736b60a8a986a776b5f9f0970285a4f7"
-   NEXT_PUBLIC_LIVEPEER_KEY="f953aa45-5454-4d14-9104-b5a9f96d8189"
+   PRIVATE_KEY=""
+   NEXT_PUBLIC_LIVEPEER_KEY=""
    NEXT_PUBLIC_WEB3_STORAGE_KEY=
-   NEXT_PUBLIC_IMAGEKIT_ID="onboard"
+   NEXT_PUBLIC_IMAGEKIT_ID=""
    ```
 4. Compile the smart contract
    ```sh
