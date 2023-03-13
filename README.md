@@ -14,24 +14,17 @@
 
 [![Ourtube][product-screenshot]](https://twitter.com/suhailkakar)
 
-OurTube is a YouTube Clone built on top of Polygon network and The Graph, that allows users to create, share and watch videos, without worrying about their privacy.
-
-Here is a complete tutorial on how to build a similar project: https://blog.suhailkakar.com/building-a-full-stack-web3-youtube-clone-with-next-ipfs-the-graph-solidity-and-livepeer
-
-> This is the version 2.0 of this applications, you can find the first verion [here](https://github.com/suhailkakar/Decentralized-YouTube/tree/version-1)
+A YouTube Clone built on top of FVM and Livepeer, that allows users to create, share and watch videos, without worrying about their privacy.
 
 ### Built With
 
 - Frontend framework: Next.js
 - Smart contracts: Solidity
 - Ethereum web client library: Ethers.js
-- File storage: IPFS
-- Querying data: The Graph
+- File storage: Lighthouse (IPFS)
 - CSS Framework: TailwindCSS
 - Ethereum development environment: Hardhat
-- Layer 2 blockchain: Polygon
 - Video Infrastructure: Livepeer
-
 
 <!-- GETTING STARTED -->
 
@@ -60,30 +53,19 @@ You need to have Node.js, NPM and hardhat installed on your computer, before run
    ```sh
    yarn install
    ```
-3. Create an `.env` file and get an API key from Livepeer studio, Web3 Storage and Imagekit. 
+
+3. Create an `.env` file and get an API key from Livepeer studio, Web3 Storage and Imagekit.
    ```sh
    PRIVATE_KEY=""
    NEXT_PUBLIC_LIVEPEER_KEY=""
-   NEXT_PUBLIC_WEB3_STORAGE_KEY=
+   NEXT_PUBLIC_LIGHTHOUSE_KEY=
    NEXT_PUBLIC_IMAGEKIT_ID=""
    ```
-4. Compile the smart contract
-   ```sh
-   npx hardhat compile
-   ```
-5. Deploy the smart contract
-6. Get your contract address and paste in on `constants/index.ts`
-
-7. Deploy subgraph in `indexer` directory by following steps in `indexer/README.md` (optional, since it is already deployed in hosted service)
-
-8. Get subgraph query endpoint after deployment and update it in `constants/index.t`
-
-9. Run the app
+4. Run the app
 
    ```sh
    npm start
    ```
-
 
 ## Contributing
 
