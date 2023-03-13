@@ -1,51 +1,62 @@
 import React, { useEffect, useState } from "react";
 import { Background, Video } from "../../components";
 import { Header, Sidebar } from "../../layout";
-import { ApolloClient } from "../../clients";
-import { GET_ALL_VIDEOS } from "../../queries";
+import { getContract } from "../../utils";
+import { useContractRead } from "wagmi";
 
 export default function Home() {
-  const [videos, setVideos] = useState<String[]>([]);
+  const [videos, setVideos] = useState([]);
+  const [AllVideos, setAllVideos] = useState([]);
   const [loading, setLoading] = useState<Boolean>(true);
-  const [query, setQuery] = useState<String>("");
   const [category, setCategory] = useState<String>("");
 
   const fetchVideos = async () => {
     setLoading(true);
-    ApolloClient.query({
-      query: GET_ALL_VIDEOS,
-      variables: {
-        first: 200,
-        skip: 0,
-        orderBy: "createdAt",
-        orderDirection: "desc",
-        where: {
-          ...(query && {
-            title_contains_nocase: query,
-          }),
-          ...(category && {
-            category_contains_nocase: category,
-          }),
-        },
-      },
-      fetchPolicy: "network-only",
-    }).then(({ data }) => {
-      console.log("Videos", data.videos);
-      setVideos(data.videos);
-      setLoading(false);
+    let contract = await getContract();
+    let videosCount = await contract.videoCount();
+    console.log(String(videosCount));
+    let videos = [];
+    for (var i = videosCount; i >= 1; i--) {
+      let video = await contract.videos(i);
+      videos.push(video);
+    }
+    setVideos(videos);
+    setAllVideos(videos);
+    setLoading(false);
+  };
+
+  const filterBasedOnCategory = (category) => {
+    console.log(category);
+    if (category === "All") {
+      setVideos(AllVideos);
+    } else {
+      let filteredVideos = AllVideos.filter((video) => {
+        return video.category.toLowerCase().includes(category.toLowerCase());
+      });
+      setVideos(filteredVideos);
+    }
+  };
+
+  const filterData = (e) => {
+    let search = e;
+    let filteredVideos = AllVideos.filter((video) => {
+      return video.title.toLowerCase().includes(search.toLowerCase());
     });
+    setVideos(filteredVideos);
   };
 
   useEffect(() => {
     fetchVideos();
-  }, [query, category]);
+  }, []);
 
   return (
     <Background className="w-full">
       <div className="w-full flex flex-row">
-        <Sidebar updateCategory={(category) => setCategory(category)} />
+        <Sidebar
+          updateCategory={(category) => filterBasedOnCategory(category)}
+        />
         <div className="flex-1 h-screen flex flex-col">
-          <Header search={(text) => setQuery(text)} />
+          <Header search={(text) => filterData(text)} />
           <div className="flex flex-row flex-wrap">
             {loading ? (
               <>

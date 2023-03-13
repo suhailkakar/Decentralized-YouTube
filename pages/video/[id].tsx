@@ -1,47 +1,48 @@
-import { useRouter } from 'next/router'
-import { Header, Sidebar } from '../../layout'
-import React, { useEffect, useState } from 'react'
-import { Background, Player, Video as RelatedVideos } from '../../components'
-import { ApolloClient } from '../../clients'
-import { GET_ALL_VIDEOS } from '../../queries'
-import Link from 'next/link'
-import moment from 'moment'
-import { BiCheck } from 'react-icons/bi'
-import Avvvatars from 'avvvatars-react'
-import { IVideo } from '../../types'
+import { useRouter } from "next/router";
+import { Header, Sidebar } from "../../layout";
+import React, { useEffect, useState } from "react";
+import { Background, Player, Video as RelatedVideos } from "../../components";
+import lighthouse from "@lighthouse-web3/sdk";
+import Link from "next/link";
+import moment from "moment";
+import { BiCheck } from "react-icons/bi";
+import Avvvatars from "avvvatars-react";
+import { IVideo } from "../../types";
+import { getContract } from "../../utils";
 
 export default function Video() {
-  const router = useRouter()
-  const { id } = router.query
-  const [video, setVideo] = useState<IVideo | null>(null)
-  const [relatedVideos, setRelatedVideos] = useState<IVideo[]>([])
+  const router = useRouter();
+  const { id } = router.query;
+  const [video, setVideo] = useState<IVideo | null>(null);
+  const [relatedVideos, setRelatedVideos] = useState<IVideo[]>([]);
+  const [deal, setDeal] = useState({});
 
-  const fetchVideos = () => {
-    ApolloClient.query({
-      query: GET_ALL_VIDEOS,
-      variables: {
-        first: 20,
-        skip: 0,
-        orderBy: 'createdAt',
-        orderDirection: 'desc',
-        where: {},
-      },
-      fetchPolicy: 'network-only',
-    })
-      .then(({ data }) => {
-        setRelatedVideos(data.videos.filter((v) => v.id !== id))
-        const video = data?.videos?.find((video) => video.id === id)
-        setVideo(video)
-        console.log('videos', data.videos)
-      })
-      .catch((err) => {
-        console.log('err', err)
-      })
-  }
+  const fetchVideos = async () => {
+    if (id) {
+      let contract = await getContract();
+      let video = await contract.videos(id);
+      let videosCount = await contract.videoCount();
+      let videos = [];
+      for (var i = videosCount; i >= 1; i--) {
+        let video = await contract.videos(i);
+        videos.push(video);
+      }
+      setRelatedVideos(videos);
+      setVideo(video);
+      getDealInfo(video);
+    }
+  };
+
+  const getDealInfo = async (video) => {
+    const status = await lighthouse.dealStatus(
+      "bafkreia4ruswe7ghckleh3lmpujo5asrnd7hrtu5r23zjk2robpcoend34"
+    );
+    setDeal(status.data.dealStatus[0]);
+  };
 
   useEffect(() => {
-    fetchVideos()
-  }, [id])
+    fetchVideos();
+  }, [id]);
 
   return (
     <Background className="flex  h-screen w-full flex-row">
@@ -57,10 +58,7 @@ export default function Video() {
                   <h3 className="text-transform: text-2xl capitalize dark:text-white">
                     {video.title}
                   </h3>
-                  <p className="mt-1 text-gray-500 ">
-                    {video.category} •{' '}
-                    {moment(new Date(video.createdAt * 1000)).fromNow()}
-                  </p>
+                  <p className="mt-1 text-gray-500 ">{video.category} </p>
                 </div>
               </div>
               <div>
@@ -70,7 +68,7 @@ export default function Video() {
                   </div>
                   <div className="ml-3 flex flex-col">
                     <p className="text-md mt-1 flex items-center text-black dark:text-white">
-                      {video.author.slice(0, 13)}...{' '}
+                      {video.author.slice(0, 13)}...{" "}
                       <BiCheck size="20px" className="fill-gray ml-1" />
                     </p>
                     <p className="text-subtitle-light flex items-center text-sm ">
@@ -80,6 +78,16 @@ export default function Video() {
                 </div>
                 <p className="text-text-light dark:text-text-dark text-textSubTitle mt-4 ml-16 text-sm">
                   {video.description}
+                </p>
+                <h5 className="text-xl mt-8 ">Deal Information</h5>
+                <p className="text-text-light dark:text-text-dark text-textSubTitle mt-3 text-sm  mb-8">
+                  {Object.entries(deal).map(([key, val], i) => (
+                    <div key={i} className="mt-2 flex flex-row">
+                      <pre className="text-gray-700">{key}</pre>:{" "}
+                      {/* @ts-ignore */}
+                      <span className="ml-2">{val}</span>
+                    </div>
+                  ))}
                 </p>
               </div>
             </div>
@@ -97,5 +105,5 @@ export default function Video() {
         )}
       </div>
     </Background>
-  )
+  );
 }

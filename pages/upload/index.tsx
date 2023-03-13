@@ -1,72 +1,55 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Sidebar, Header } from '../../layout'
-import { BiCloud, BiPlus } from 'react-icons/bi'
-import { useAsset, useCreateAsset } from '@livepeer/react'
-import { UploadInput, Background } from '../../components'
-import { saveToIPFS, getContract } from '../../utils'
-import toast from 'react-hot-toast'
-
+import React, { useState, useEffect, useRef } from "react";
+import { Sidebar, Header } from "../../layout";
+import { BiCloud, BiPlus } from "react-icons/bi";
+import { UploadInput, Background } from "../../components";
+import { getContract } from "../../utils";
+import lighthouse from "@lighthouse-web3/sdk";
 export default function Upload() {
-  const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [category, setCategory] = useState<string>('')
-  const [location, setLocation] = useState<string>('')
-  const [thumbnail, setThumbnail] = useState<File>()
-  const [uploadData, setUploadData] = useState({})
-  const [video, setVideo] = useState<File>()
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [thumbnail, setThumbnail] = useState<string>();
+  const [video, setVideo] = useState<string>("");
+  const [isUploading, setIsUploading] = useState<boolean>();
 
-  const thumbnailRef = useRef<HTMLInputElement>(null)
-
-  const { mutate: createAsset, data: asset, uploadProgress } = useCreateAsset()
+  const thumbnailRef = useRef<HTMLInputElement>(null);
 
   const goBack = () => {
-    window.history.back()
-  }
+    window.history.back();
+  };
 
-  // When a user clicks on the upload button
+  const uploadToLighthouse = async (e, type) => {
+    setIsUploading(true);
+    const output = await lighthouse.upload(
+      e,
+      process.env.NEXT_PUBLIC_LIGHTHOUSE_KEY
+    );
+    let cid = output.data.Hash;
+    if (type == "thumbnail") {
+      setThumbnail(cid);
+    } else {
+      setVideo(cid);
+    }
+    setIsUploading(false);
+  };
+
   const handleSubmit = async () => {
-    // Calling the upload video function
-    await uploadVideo()
-    // Calling the upload thumbnail function and getting the CID
-    const thumbnailCID = await uploadThumbnail()
-    // Creating a object to store the metadata
     let data = {
-      video: asset?.id,
+      video,
       title,
       description,
       location,
       category,
-      thumbnail: thumbnailCID,
+      thumbnail,
       UploadedDate: Date.now(),
-    }
-    // Calling the saveVideo function and passing the metadata object
-    console.log(data)
-    await saveVideo(data)
-  }
+    };
 
-  // Function to upload the video to IPFS
-  const uploadThumbnail = async () => {
-    // Passing the file to the saveToIPFS function and getting the CID
-    const cid = await saveToIPFS(thumbnail)
-    // Returning the CID
-    return cid
-  }
+    await saveVideo(data);
+  };
 
-  // Function to upload the video to Livepeer
-  const uploadVideo = async () => {
-    // Calling the createAsset function from the useCreateAsset hook to upload the video
-    createAsset({
-      name: title,
-      file: video,
-    })
-  }
-
-  // Function to save the video to the Contract
-  const saveVideo = async (data = uploadData) => {
-    // Get the contract from the getContract function
-    let contract = await getContract()
-    // Upload the video to the contract
-
+  const saveVideo = async (data) => {
+    let contract = await getContract();
     await contract.uploadVideo(
       data.video,
       data.title,
@@ -76,31 +59,35 @@ export default function Upload() {
       data.thumbnail,
       false,
       data.UploadedDate
-    )
-  }
+    );
+  };
 
   return (
     <Background>
-      <p className="text-2xl font-bold text-white">
-        {uploadProgress && uploadProgress * 100}
-      </p>
       <div className="flex h-screen w-full flex-row">
         <Sidebar />
         <div className="flex flex-1 flex-col">
           <Header />
           <div className="mt-5 mr-10 flex  justify-end">
+            <p className="text-md  text-black dark:text-white mt-2 mr-4">
+              {isUploading && " Uploading..."}
+            </p>
+
             <div className="flex items-center">
               <button
                 className="mr-6  rounded-lg border border-gray-600 bg-transparent py-2  px-6  dark:text-[#9CA3AF]"
                 onClick={() => {
-                  goBack()
+                  goBack();
                 }}
               >
                 Discard
               </button>
               <button
                 onClick={handleSubmit}
-                className="flex flex-row items-center  justify-between  rounded-lg bg-blue-500 py-2 px-4 text-white hover:bg-blue-700"
+                disabled={isUploading}
+                className={`${
+                  isUploading ? "opacity-25" : "opacity-100"
+                } flex flex-row items-center  justify-between  rounded-lg bg-blue-500 py-2 px-4 text-white hover:bg-blue-700 `}
               >
                 <BiCloud />
                 <p className="ml-2">Upload</p>
@@ -168,16 +155,16 @@ export default function Upload() {
 
               <div
                 onClick={() => {
-                  thumbnailRef.current.click()
+                  thumbnailRef.current.click();
                 }}
                 className="border-borderWhiteGray mt-2 flex  h-36 w-64 items-center justify-center rounded-md  border-2 border-dashed p-2 dark:border-gray-600"
               >
                 {thumbnail ? (
                   <img
                     onClick={() => {
-                      thumbnailRef.current.click()
+                      thumbnailRef.current.click();
                     }}
-                    src={URL.createObjectURL(thumbnail)}
+                    src={`https://gateway.lighthouse.storage/ipfs/` + thumbnail}
                     alt="thumbnail"
                     className="h-full rounded-md"
                   />
@@ -191,15 +178,20 @@ export default function Upload() {
                 className="hidden"
                 ref={thumbnailRef}
                 onChange={(e) => {
-                  setThumbnail(e.target.files[0])
+                  uploadToLighthouse(e, "thumbnail");
                 }}
               />
             </div>
 
-            <UploadInput isAudio={false} setVideo={setVideo} />
+            <UploadInput
+              isAudio={false}
+              setVideo={(video) => {
+                uploadToLighthouse(video, "video");
+              }}
+            />
           </div>
         </div>
       </div>
     </Background>
-  )
+  );
 }

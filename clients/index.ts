@@ -1,4 +1,3 @@
-import ApolloClient from "./apollo";
-import LivePeerClient from "./livepeer";
+import LivepeerClient from "./livepeer";
 
-export { ApolloClient, LivePeerClient };
+export { LivepeerClient };

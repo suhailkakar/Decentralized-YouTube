@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@livepeer/react": "^0.4.0",
+    "@lighthouse-web3/sdk": "^0.1.12",
+    "@livepeer/react": "^2.3.0",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
     "@nomiclabs/hardhat-ethers": "^2.0.0",
@@ -28,7 +29,6 @@
     "graphql": "^16.6.0",
     "hardhat-gas-reporter": "^1.0.8",
     "ipfs-http-client": "^58.0.0",
-    "livepeer": "^0.4.0",
     "moment": "^2.29.4",
     "next": "12.3.0",
     "plyr-react": "^5.1.0",

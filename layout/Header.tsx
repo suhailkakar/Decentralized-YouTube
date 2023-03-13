@@ -45,7 +45,7 @@ export default function Header({ search }: IHeader) {
           <ConnectButton
             label="Connect Wallet"
             accountStatus="address"
-            showBalance={false}
+            showBalance={true}
           />
         </div>
       </div>

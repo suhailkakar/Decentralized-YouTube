@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import { BiCheck } from "react-icons/bi";
-import getImage from "../lib/getImage";
 import { IVideo } from "../types";
 
 interface IProps {
@@ -25,7 +24,7 @@ const Video: React.FC<IProps> = ({ video, horizontal }) => {
               ? "object-cover rounded-lg w-60  "
               : "object-cover rounded-lg w-full h-40"
           }
-          src={getImage(video.thumbnailHash)}
+          src={`https://gateway.lighthouse.storage/ipfs/` + video.thumbnailHash}
           alt=""
         />
         <div className={horizontal && "ml-3  w-80"}>

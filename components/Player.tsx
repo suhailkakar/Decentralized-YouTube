@@ -1,33 +1,25 @@
 import React from "react";
-import { useAsset } from "@livepeer/react";
-import Plyr from "plyr-react";
-import "plyr-react/plyr.css";
+import { useAsset, Player } from "@livepeer/react";
 
 interface PlayerProps {
   id: any;
 }
 
-const Player: React.FC<PlayerProps> = ({ id }) => {
-  const { data: asset } = useAsset(id);
+const VideoPlayer: React.FC<PlayerProps> = ({ id }) => {
+  console.log(id);
 
   return (
-    <Plyr
-      source={{
-        type: "video",
-        title: asset?.name,
-        sources: [
-          {
-            src: asset?.downloadUrl,
-            type: "video/mp4",
-          },
-        ],
+    <Player
+      title="Waterfalls"
+      src={"ipfs://" + id}
+      showPipButton
+      showTitle={false}
+      aspectRatio="16to9"
+      controls={{
+        autohide: 3000,
       }}
-      options={{
-        autoplay: true,
-      }}
-      autoPlay={true}
     />
   );
 };
 
-export default Player;
+export default VideoPlayer;

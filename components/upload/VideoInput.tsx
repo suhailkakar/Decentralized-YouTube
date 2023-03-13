@@ -6,13 +6,13 @@ export default function UploadInput(props) {
 
   const handleInput = (e) => {
     setVideo(URL.createObjectURL(e.target.files[0]));
-    props.setVideo(e.target.files[0]);
-    console.log(e.target.files[0]);
+    props.setVideo(e);
   };
 
   return (
     <div
       onClick={() => {
+        // @ts-ignore
         videoRef.current.click();
       }}
       className={

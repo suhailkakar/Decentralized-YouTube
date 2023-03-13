@@ -24,10 +24,11 @@ function Landing() {
                 className="text-5xl text-text-light md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4 dark:text-text-dark"
                 data-aos="zoom-y-out"
               >
-                It is YouTube, but{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+                A{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-orange-400">
                   Decentralized
-                </span>
+                </span>{" "}
+                YouTube Clone
               </h1>
               <div className="max-w-3xl mx-auto">
                 <p
@@ -35,9 +36,9 @@ function Landing() {
                   data-aos="zoom-y-out"
                   data-aos-delay="150"
                 >
-                  A YouTube Clone built on top of Polygon network, allow users
-                  to create, share and watch videos, without worrying about
-                  their privacy.
+                  A YouTube Clone built on top of FVM and Livepeer, that allow
+                  users to create, share and watch videos, without worrying
+                  about their privacy.
                 </p>
                 <div className="flex justify-center">
                   <ConnectButton
