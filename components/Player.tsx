@@ -6,11 +6,8 @@ interface PlayerProps {
 }
 
 const VideoPlayer: React.FC<PlayerProps> = ({ id }) => {
-  console.log(id);
-
   return (
     <Player
-      title="Waterfalls"
       src={"ipfs://" + id}
       showPipButton
       showTitle={false}
