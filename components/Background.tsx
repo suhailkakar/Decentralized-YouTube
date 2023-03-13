@@ -6,7 +6,7 @@ interface BackgroundProps {
 }
 const Background: React.FC<BackgroundProps> = ({ children, className }) => {
   return (
-    <div
+    <body
       className={
         "bg-background-light dark:bg-background-dark  transition-all" +
         " " +
@@ -14,7 +14,7 @@ const Background: React.FC<BackgroundProps> = ({ children, className }) => {
       }
     >
       {children}
-    </div>
+    </body>
   );
 };
 

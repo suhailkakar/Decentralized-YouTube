@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Background, Player, Video as RelatedVideos } from "../../components";
 import lighthouse from "@lighthouse-web3/sdk";
 import Link from "next/link";
-import moment from "moment";
 import { BiCheck } from "react-icons/bi";
 import Avvvatars from "avvvatars-react";
 import { IVideo } from "../../types";
@@ -34,9 +33,8 @@ export default function Video() {
   };
 
   const getDealInfo = async (video) => {
-    const status = await lighthouse.dealStatus(
-      "bafkreia4ruswe7ghckleh3lmpujo5asrnd7hrtu5r23zjk2robpcoend34"
-    );
+    const status = await lighthouse.dealStatus(video.hash);
+
     setDeal(status.data.dealStatus[0]);
   };
 
@@ -45,7 +43,7 @@ export default function Video() {
   }, [id]);
 
   return (
-    <Background className="flex  h-screen w-full flex-row">
+    <Background className="flex   w-full flex-row">
       <Sidebar />
       <div className="flex flex-1 flex-col">
         <Header />
@@ -79,15 +77,20 @@ export default function Video() {
                 <p className="text-text-light dark:text-text-dark text-textSubTitle mt-4 ml-16 text-sm">
                   {video.description}
                 </p>
-                <h5 className="text-xl mt-8 ">Deal Information</h5>
+                <h5 className="text-xl mt-8 dark:text-white ">
+                  Deal Information
+                </h5>
                 <p className="text-text-light dark:text-text-dark text-textSubTitle mt-3 text-sm  mb-8">
-                  {Object.entries(deal).map(([key, val], i) => (
-                    <div key={i} className="mt-2 flex flex-row">
-                      <pre className="text-gray-700">{key}</pre>:{" "}
-                      {/* @ts-ignore */}
-                      <span className="ml-2">{val}</span>
-                    </div>
-                  ))}
+                  {deal &&
+                    Object.entries(deal).map(([key, val], i) => (
+                      <div key={i} className="mt-2 flex flex-row">
+                        <pre className="text-gray-700 dark:text-gray-400">
+                          {key}
+                        </pre>
+                        : {/* @ts-ignore  */}
+                        <span className="ml-2">{val}</span>
+                      </div>
+                    ))}
                 </p>
               </div>
             </div>
